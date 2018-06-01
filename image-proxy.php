@@ -70,7 +70,7 @@ if ( ! empty( $parsed_external_fallback_domain['scheme'] ) ) {
 	$external_fallback_domain_scheme = $parsed_external_fallback_domain['scheme'];
 }
 define( 'EXTERNAL_FALLBACK_DOMAIN', $external_fallback_domain );
-define( 'EXTERNAL_FALLBACK_DOMAIN_SCHEME', $external_fallback_domain );
+define( 'EXTERNAL_FALLBACK_DOMAIN_SCHEME', $external_fallback_domain_scheme );
 
 define( 'JPG_MAX_QUALITY', 89 );
 define( 'PNG_MAX_QUALITY', 80 );
