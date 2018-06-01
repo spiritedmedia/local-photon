@@ -247,6 +247,7 @@ function fetch_raw_data( $url, $timeout = 10, $connect_timeout = 3, $max_redirs 
 		httpdie( '400 Bad Request', 'Too many redirects' );
 	}
 
+    var_dump( $url );
 	// handle all other errors
 	switch( $status ) {
 		case 401:
@@ -296,7 +297,11 @@ if ( ! read_raw_data_from_disk( $url ) && ! empty( EXTERNAL_FALLBACK_DOMAIN ) ) 
 		substr( parse_url( 'scheme://host' . '/' . EXTERNAL_FALLBACK_DOMAIN . '/' . $_SERVER['REQUEST_URI'], PHP_URL_PATH ), 1 ), // see https://bugs.php.net/bug.php?id=71112 (and #66813)
 		isset( $_GET['q'] ) ? '?' . $_GET['q'] : ''
 	);
-	fetch_raw_data( $url );
+
+    // Make sure the URL doesn't have // in it like a.spirited.media//foo/bar
+    $url = str_replace( EXTERNAL_FALLBACK_DOMAIN . '//', EXTERNAL_FALLBACK_DOMAIN . '/', $url );
+
+    fetch_raw_data( $url );
 	header( 'X-Photon-Remote: true' );
 }
 
